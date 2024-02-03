@@ -79,6 +79,7 @@ function createCommentTemplate(card_id, card_message, card_liked) {
 function pushPost(container, input_data=null) {
     let card_id;
     let card_msg;
+    let card_liked;
 
     let feed_container = document.getElementById(container);
     if (!input_data) {
@@ -86,18 +87,20 @@ function pushPost(container, input_data=null) {
         
         card_id = `comment-${randomId(10)}`;
         card_msg = post_input.value;
+        card_liked = false;
         post_input.value = "";
         document.getElementById('post-char-used').innerHTML = "0";
     } else {
         card_id = input_data.id;
         card_msg = input_data.msg;
+        card_liked = input_data.liked;
     }
 
     if (!card_msg) {
         return;
     }
 
-    let card = createCommentTemplate(card_id, card_msg);
+    let card = createCommentTemplate(card_id, card_msg, card_liked);
 
     feed_container.innerHTML = card + feed_container.innerHTML;
 
