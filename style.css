@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+.header {
+    width: 100%;
+    height: 66px;
+}
+
+.navbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 64px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D6DEE5;
+}
+
+.container {
+    width: 100%;
+    height: calc(100% - 66px);
+    display: flex;
+}
+
+.post-section {
+    width: 60%;
+    height: 100%;
+    background-color: #ECF8FF66;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-group {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.header-text {
+    width: 100%;
+    font-size: 16px;
+}
+
+.post-card {
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #D6DEE5;
+    border-radius: 8px;
+}
+
+.post-card-content {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+}
+
+#post-content-input {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    line-height: 22.4px;
+    font-weight: 400;
+    color: #000000;
+    height: 126px;
+    outline: none;
+}
+
+#post-content-input::placeholder {
+    color: #91A1B7;
+}
+
+.post-card-push {
+    padding-top: 16px;
+    border-top: 1px solid #F4F6F9;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.text-limit {
+    color: #61738E;
+}
+
+#post-push-button {
+    padding: 8px 24px;
+    border-radius: 100px;
+    background-color: #0041CA;
+    color: #FFFFFF;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.feed-section {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: start;
+    width: 40%;
+    overflow-y: scroll;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+
+:has(.card) .cards-container::before {
+    display: none !important;
+}
+
+:has(:not(.card)) .cards-container::before {
+    content: "No posts to show!";
+    color: #D6DEE5;
+    text-align: center;
+    display: block;
+}
+
+.card {
+    width: 100%;
+}
+
+.card-main {
+    width: 100%;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE5;
+    display: flex;
+    gap: 12px;
+}
+
+.card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-texts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-user-info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card-user-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-user-id {
+    font-size: 14px;
+    color: #61738E;
+}
+
+.card-message {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25.6px;
+}
+
+.card-controls {
+    display: flex;
+    gap: 16px;
+}
+
+.card-controls-button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.card-interactions {
+    display: flex;
+    gap: 32px;
+}
+
+.card-interactions-button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.card-comments {
+    padding-left: 56px;
+}
+
+.card:has(.card-comments > .card) > .card-main {
+    border-bottom-right-radius: 0;
+}
+
+.card-comments > .card .card-main {
+    border-radius: 0;
+    border-top: none;
+}
+
+.card-comments > .card:last-child .card-main {
+    border-radius: 8px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#delete-modal[open] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #00000099;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#delete-modal {
+    display: none;
+}
+
+.confirm-box {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 24px;
+    width: 548px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.confirm-box-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-box-header-button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.confirm-message {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.confirm-ctx {
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+}
+
+.confirm-ctx > button {
+    padding: 12px 40px;
+    outline: none;
+    color: #005BB3;
+    border: 1px solid #005BB3;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.delete-button {
+    color: #FFFFFF !important;
+    background-color: #AA000F !important;
+    border: none !important;
+}
+
