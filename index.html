@@ -55,64 +55,7 @@
                 Your Feed
             </h1>
 
-            <div class="cards-container" id="feeds">
-                <div class="card" id="${card_id}">
-                    <div class="card-main">
-                        <div class="card-author-image">
-                            <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="Profile Image">
-                        </div>
-        
-                        <div class="card-content">
-                            <div class="card-texts">
-                                <div class="card-header">
-                                    <div class="card-user-info">
-                                        <h3 class="card-user-name">Joanne Graham</h3>
-                                        <span class="card-user-id">@joannegraham123</span>
-                                    </div>
-        
-                                    <div class="card-controls">
-                                        <button class="card-controls-button">
-                                            <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/028/original/edit.png?1706888661" alt="Edit">
-                                        </button>
-        
-                                        <button class="card-controls-button" onclick="deleteComment('${card_id}');">
-                                            <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/027/original/delete.png?1706888643" alt="Delete">
-                                        </button>
-                                    </div>
-                                </div>
-        
-                                <textarea class="card-message" oninput="updateEditCharCounter(this);">card_message</textarea>
-                            </div>
-        
-                            <div class="card-interactions">
-                                <button class="card-interactions-button">
-                                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt="Comment">
-                                </button>
-        
-                                <button class="card-interactions-button like-button" onclick="toggleLike('${card_id}');">
-                                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679" alt="Like">
-                                </button>
-                            </div>
-
-                            <div class="card-edit">
-                                <div class="text-limit">
-                                    <span class="edit-char-used">0</span> / 100
-                                </div>
-       
-                                <div class="card-edit-ctx">
-                                    <button class="button edit-cancel-button" onclick="pushPost('feeds');">
-                                        Cancel
-                                    </button>
-                                    <button class="button edit-push-button" onclick="pushPost('feeds');">
-                                        Edit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-comments" id="comments-card_id"></div>
-                </div>
-            </div>
+            <div class="cards-container" id="feeds"></div>
         </section>
     </div>
 
