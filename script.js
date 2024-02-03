@@ -43,7 +43,7 @@ function createCommentTemplate(card_id, card_message, card_liked) {
                             </div>
 
                             <div class="card-controls">
-                                <button class="card-controls-button">
+                                <button class="card-controls-button" onclick="editComment(this);">
                                     <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/028/original/edit.png?1706888661" alt="Edit">
                                 </button>
 
@@ -53,9 +53,7 @@ function createCommentTemplate(card_id, card_message, card_liked) {
                             </div>
                         </div>
 
-                        <div class="card-message">
-                            ${card_message}
-                        </div>
+                        <textarea class="card-message" disabled maxlength="100" oninput="updateEditCharCounter(this);">${card_message}</textarea>
                     </div>
 
                     <div class="card-interactions">
@@ -66,6 +64,21 @@ function createCommentTemplate(card_id, card_message, card_liked) {
                         <button class="card-interactions-button like-button" onclick="toggleLike('${card_id}');">
                             <img src="${!card_liked ? 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679' : 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455'}" alt="Like">
                         </button>
+                    </div>
+
+                    <div class="card-edit">
+                        <div class="text-limit">
+                            <span class="edit-char-used">0</span> / 100
+                        </div>
+
+                        <div class="card-edit-ctx">
+                            <button class="button edit-cancel-button" onclick="cancelComment(this);">
+                                Cancel
+                            </button>
+                            <button class="button edit-push-button" onclick="editPush(this);">
+                                Edit
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,7 +147,45 @@ function toggleLike(card_id) {
     }
 
     localStorage.setItem("data", JSON.stringify(data));
+
     let heart = document.querySelector(`#${card_id} .like-button > img`);
     heart.src = card_liked ? sol_heart : reg_heart;
+}
+
+function updateEditCharCounter(source) {
+    source.parentElement.parentElement.querySelector(".edit-char-used").innerText = source.value.length;
+    source.style.height = source.scrollHeight + "px";
+}
+
+function editComment(source) {
+    let txa = source.parentElement.parentElement.parentElement.querySelector(".card-message");
+    txa.disabled = false;
+    txa.placeholder = txa.value;
+    updateEditCharCounter(txa);
+}
+
+function cancelComment(source) {
+    let txa = source.parentElement.parentElement.parentElement.querySelector(".card-message");
+    txa.disabled = true;
+    txa.value = txa.placeholder;
+}
+
+function editPush(source) {
+    let card = source.parentElement.parentElement.parentElement.parentElement.parentElement;
+    let txa = card.querySelector(".card-message");
+    txa.disabled = true;
+    txa.placeholder = txa.value;
+
+    if (!txa.value) {
+        return;
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].id == card.id) {
+            data[i].msg = txa.value;
+        }
+    }
+
+    localStorage.setItem("data", JSON.stringify(data));
 }
 

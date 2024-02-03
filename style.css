@@ -201,9 +201,16 @@ body {
 }
 
 .card-message {
+    width: 100%;
+    border: none;
+    resize: none;
     font-size: 16px;
-    font-weight: 400;
     line-height: 25.6px;
+    font-weight: 400;
+    color: #000000;
+    outline: none;
+    background-color: transparent;
+    height: max-content;
 }
 
 .card-controls {
@@ -220,7 +227,7 @@ body {
 }
 
 .card-interactions {
-    display: flex;
+    display: none;
     gap: 32px;
 }
 
@@ -315,6 +322,45 @@ body {
 .delete-button {
     color: #FFFFFF !important;
     background-color: #AA000F !important;
+    border: none !important;
+}
+
+.card-edit {
+    padding-top: 16px;
+    border-top: 1px solid #F4F6F9;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.card:has(.card-message[disabled]) > .card-main > .card-content > .card-edit {
+    display: none;
+}
+
+.card:has(.card-message[disabled]) > .card-main > .card-content > .card-interactions {
+    display: flex;
+}
+
+.card-edit-ctx {
+    display: flex;
+    gap: 16px;
+}
+
+.card-edit button {
+    padding: 8px 24px;
+    border-radius: 100px;
+    background-color: transparent;
+    color: #91A1B7;
+    outline: none;
+    border: 1px solid #91A1B7;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.edit-push-button {
+    background-color: #0041CA !important;
+    color: #FFFFFF !important;
     border: none !important;
 }
 
