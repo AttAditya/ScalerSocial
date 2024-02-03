@@ -26,7 +26,7 @@ function randomId(size) {
     return temp;
 }
 
-function createCommentTemplate(card_id, card_message) {
+function createCommentTemplate(card_id, card_message, card_liked) {
     let template = `
         <div class="card" id="${card_id}">
             <div class="card-main">
@@ -63,8 +63,8 @@ function createCommentTemplate(card_id, card_message) {
                             <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt="Comment">
                         </button>
 
-                        <button class="card-interactions-button">
-                            <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679" alt="Like">
+                        <button class="card-interactions-button like-button" onclick="toggleLike('${card_id}');">
+                            <img src="${!card_liked ? 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679' : 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455'}" alt="Like">
                         </button>
                     </div>
                 </div>
@@ -93,6 +93,10 @@ function pushPost(container, input_data=null) {
         card_msg = input_data.msg;
     }
 
+    if (!card_msg) {
+        return;
+    }
+
     let card = createCommentTemplate(card_id, card_msg);
 
     feed_container.innerHTML = card + feed_container.innerHTML;
@@ -101,7 +105,8 @@ function pushPost(container, input_data=null) {
         data.unshift({
             id: card_id,
             msg: card_msg,
-            container: container
+            container: container,
+            liked: false
         });
         localStorage.setItem("data", JSON.stringify(data));
     }
@@ -111,5 +116,22 @@ function deleteComment(commentId) {
     document.getElementById(commentId).remove();
     data = data.filter(c => c.id != commentId);
     localStorage.setItem("data", JSON.stringify(data));
+}
+
+function toggleLike(card_id) {
+    let reg_heart = "https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679";
+    let sol_heart = "https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455";
+
+    let card_liked = false;
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].id == card_id) {
+            data[i].liked = !data[i].liked;
+            card_liked = data[i].liked;
+        }
+    }
+
+    localStorage.setItem("data", JSON.stringify(data));
+    let heart = document.querySelector(`#${card_id} .like-button > img`);
+    heart.src = card_liked ? sol_heart : reg_heart;
 }
 
