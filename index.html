@@ -34,7 +34,7 @@
                             <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="Profile Image">
                         </div>
 
-                        <textarea name="post-content-input" id="post-content-input" maxlength="100" placeholder="Type your thoughts here..."></textarea>
+                        <textarea name="post-content-input" id="post-content-input" maxlength="100" placeholder="Type your thoughts here..." oninput="document.getElementById('post-char-used').innerHTML = this.value.length;"></textarea>
                     </div>
 
                     <div class="post-card-push">
