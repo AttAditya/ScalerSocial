@@ -5,6 +5,20 @@
     font-family: sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F4F6F9;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #BAC6D8;
+}
+
 body {
     width: 100%;
     height: 100vh;
@@ -116,7 +130,7 @@ body {
     gap: 16px;
     justify-content: start;
     width: 40%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .cards-container {
@@ -309,9 +323,14 @@ body {
         flex-wrap: wrap;
     }
 
-    .feed-section, .post-section {
+    .post-section {
+        width: 100%;
+    }
+    
+    .feed-section {
         width: 100%;
         min-height: 100vh;
+        overflow-y: visible;
     }
 
     .navbar {
