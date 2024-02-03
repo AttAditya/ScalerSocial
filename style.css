@@ -304,3 +304,20 @@ body {
     border: none !important;
 }
 
+@media (max-width: 846px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .feed-section, .post-section {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        padding: 0;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
