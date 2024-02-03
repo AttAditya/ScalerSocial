@@ -87,6 +87,7 @@ function pushPost(container, input_data=null) {
         card_id = `comment-${randomId(10)}`;
         card_msg = post_input.value;
         post_input.value = "";
+        document.getElementById('post-char-used').innerHTML = "0";
     } else {
         card_id = input_data.id;
         card_msg = input_data.msg;
