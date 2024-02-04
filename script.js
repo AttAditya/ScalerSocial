@@ -135,8 +135,15 @@ function pushPost(container, input_data=null) {
     }
 }
 
-function deleteComment(commentId) {
+function deleteComment(commentId, force=false) {
     let comment = document.getElementById(commentId);
+    
+    if (force) {
+        data = data.filter(c => c.id != commentId);
+        localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
+        return;
+    }
+
     if (comment) {
         let modal = document.getElementById("delete-modal");
         modal.open = true;
@@ -235,7 +242,7 @@ function createNewComment(source) {
     editComment(comment.querySelector(".card-controls-button"), true);
 
     comment.querySelector(".edit-cancel-button").onclick = () => {
-        deleteComment(comment.id);
+        deleteComment(comment.id, true);
     };
 }
 
