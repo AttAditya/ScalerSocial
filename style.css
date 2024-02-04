@@ -164,6 +164,11 @@ body {
     gap: 12px;
 }
 
+.cards-container > .card > .card-main {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+
 .card:last-child > .card-main {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -172,11 +177,8 @@ body {
 }
 
 .card:has(.card-comments > .card) > .card-main {
+    border-bottom-left-radius: 8px;
     border-bottom-right-radius: 0;
-}
-
-.card-comments > .card .card-main {
-    border-top: none;
 }
 
 .card-content {
