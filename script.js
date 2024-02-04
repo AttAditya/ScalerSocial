@@ -1,7 +1,7 @@
 var data = [];
 
 function loadData() {
-    data = localStorage.getItem("data");
+    data = localStorage.getItem("ScalerSocial-data");
     
     if (data == null) {
         data = "[]";
@@ -131,7 +131,7 @@ function pushPost(container, input_data=null) {
             container: container,
             liked: false
         });
-        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
     }
 }
 
@@ -144,12 +144,12 @@ function deleteComment(commentId) {
         modal.querySelector(".delete-button").onclick = () => {
             comment.remove();
             data = data.filter(c => c.id != commentId);
-            localStorage.setItem("data", JSON.stringify(data));
+            localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
             modal.open = false;
         };
     } else {
         data = data.filter(c => c.id != commentId);
-        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
     }
 }
 
@@ -165,7 +165,7 @@ function toggleLike(card_id) {
         }
     }
 
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
 
     let heart = document.querySelector(`#${card_id} .like-button > img`);
     heart.src = card_liked ? sol_heart : reg_heart;
@@ -213,7 +213,7 @@ function editPush(source) {
         }
     }
 
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
 }
 
 function createNewComment(source) {
@@ -227,7 +227,7 @@ function createNewComment(source) {
     };
     
     data.unshift(input_data);
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
     
     pushPost("comments-" + card.id, input_data);
 
