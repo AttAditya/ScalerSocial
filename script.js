@@ -138,10 +138,19 @@ function pushPost(container, input_data=null) {
 function deleteComment(commentId) {
     let comment = document.getElementById(commentId);
     if (comment) {
-        comment.remove();
+        let modal = document.getElementById("delete-modal");
+        modal.open = true;
+
+        modal.querySelector(".delete-button").onclick = () => {
+            comment.remove();
+            data = data.filter(c => c.id != commentId);
+            localStorage.setItem("data", JSON.stringify(data));
+            modal.open = false;
+        };
+    } else {
+        data = data.filter(c => c.id != commentId);
+        localStorage.setItem("data", JSON.stringify(data));
     }
-    data = data.filter(c => c.id != commentId);
-    localStorage.setItem("data", JSON.stringify(data));
 }
 
 function toggleLike(card_id) {
