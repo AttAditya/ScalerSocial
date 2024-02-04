@@ -141,6 +141,11 @@ function deleteComment(commentId, force=false) {
     if (force) {
         data = data.filter(c => c.id != commentId);
         localStorage.setItem("ScalerSocial-data", JSON.stringify(data));
+        
+        if (comment) {
+            comment.remove();
+        }
+        
         return;
     }
 
