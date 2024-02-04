@@ -57,7 +57,7 @@ function createCommentTemplate(card_id, card_message, card_liked) {
                     </div>
 
                     <div class="card-interactions">
-                        <button class="card-interactions-button">
+                        <button class="card-interactions-button" onclick="createNewComment(this);">
                             <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt="Comment">
                         </button>
 
@@ -76,7 +76,7 @@ function createCommentTemplate(card_id, card_message, card_liked) {
                                 Cancel
                             </button>
                             <button class="button edit-push-button" onclick="editPush(this);">
-                                Edit
+                                Post
                             </button>
                         </div>
                     </div>
@@ -95,6 +95,14 @@ function pushPost(container, input_data=null) {
     let card_liked;
 
     let feed_container = document.getElementById(container);
+    if (feed_container == null) {
+        if (input_data) {
+            deleteComment(input_data.id); 
+        }
+        
+        return;
+    }
+
     if (!input_data) {
         let post_input = document.getElementById("post-content-input");
         
@@ -114,7 +122,6 @@ function pushPost(container, input_data=null) {
     }
 
     let card = createCommentTemplate(card_id, card_msg, card_liked);
-
     feed_container.innerHTML = card + feed_container.innerHTML;
 
     if (!input_data) {
@@ -129,7 +136,10 @@ function pushPost(container, input_data=null) {
 }
 
 function deleteComment(commentId) {
-    document.getElementById(commentId).remove();
+    let comment = document.getElementById(commentId);
+    if (comment) {
+        comment.remove();
+    }
     data = data.filter(c => c.id != commentId);
     localStorage.setItem("data", JSON.stringify(data));
 }
@@ -157,11 +167,19 @@ function updateEditCharCounter(source) {
     source.style.height = source.scrollHeight + "px";
 }
 
-function editComment(source) {
+function editComment(source, empty=false) {
     let txa = source.parentElement.parentElement.parentElement.querySelector(".card-message");
+    
     txa.disabled = false;
     txa.placeholder = txa.value;
+    
+    if (empty) {
+        txa.value = "";
+    }
+
     updateEditCharCounter(txa);
+
+    txa.focus();
 }
 
 function cancelComment(source) {
@@ -173,12 +191,12 @@ function cancelComment(source) {
 function editPush(source) {
     let card = source.parentElement.parentElement.parentElement.parentElement.parentElement;
     let txa = card.querySelector(".card-message");
-    txa.disabled = true;
-    txa.placeholder = txa.value;
-
     if (!txa.value) {
         return;
     }
+
+    txa.disabled = true;
+    txa.placeholder = txa.value;
 
     for (let i = 0; i < data.length; i++) {
         if (data[i].id == card.id) {
@@ -187,5 +205,28 @@ function editPush(source) {
     }
 
     localStorage.setItem("data", JSON.stringify(data));
+}
+
+function createNewComment(source) {
+    let card = source.parentElement.parentElement.parentElement.parentElement;
+
+    let input_data = {
+        id: `comment-${randomId(10)}`,
+        msg: "Type your thoughts here...",
+        container: "comments-" + card.id,
+        liked: false
+    };
+    
+    data.unshift(input_data);
+    localStorage.setItem("data", JSON.stringify(data));
+    
+    pushPost("comments-" + card.id, input_data);
+
+    let comment = document.getElementById(input_data.id);
+    editComment(comment.querySelector(".card-controls-button"), true);
+
+    comment.querySelector(".edit-cancel-button").onclick = () => {
+        deleteComment(comment.id);
+    };
 }
 

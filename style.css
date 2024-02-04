@@ -158,10 +158,25 @@ body {
 .card-main {
     width: 100%;
     padding: 24px;
-    border-radius: 8px;
+    border-radius: 0;
     border: 1px solid #D6DEE5;
     display: flex;
     gap: 12px;
+}
+
+.card:last-child > .card-main {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.card:has(.card-comments > .card) > .card-main {
+    border-bottom-right-radius: 0;
+}
+
+.card-comments > .card .card-main {
+    border-top: none;
 }
 
 .card-content {
@@ -241,21 +256,6 @@ body {
 
 .card-comments {
     padding-left: 56px;
-}
-
-.card:has(.card-comments > .card) > .card-main {
-    border-bottom-right-radius: 0;
-}
-
-.card-comments > .card .card-main {
-    border-radius: 0;
-    border-top: none;
-}
-
-.card-comments > .card:last-child .card-main {
-    border-radius: 8px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 
 #delete-modal[open] {
