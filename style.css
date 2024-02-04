@@ -280,7 +280,7 @@ body {
     background-color: #FFFFFF;
     border-radius: 8px;
     padding: 24px;
-    width: 548px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -385,6 +385,18 @@ body {
         padding: 0;
         justify-content: space-around;
         align-items: center;
+    }
+
+    .confirm-box {
+        width: 90%;
+    }
+
+    .confirm-ctx {
+        flex-wrap: wrap;
+    }
+
+    .confirm-ctx > button {
+        width: 100%;
     }
 }
 
